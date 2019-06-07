@@ -35,13 +35,13 @@ moment.updateLocale('en', {
  *
  **/
 
-const time_to_event = moment([2031, 0, 1]);
+const time_to_event = moment([2019, 6, 7, 19, 14]);
 
 /******/
 
-var years_to_event = time_to_event.diff(moment(), 'years', true).toFixed(1);
-var months_to_event = time_to_event.diff(moment(), 'months', true).toFixed(1);
-var days_to_event = time_to_event.diff(moment(), 'days', true).toFixed(1);
+var days_to_event = Math.floor(time_to_event.diff(moment(), 'days', true).toFixed(1));
+var hours_to_event = Math.floor(time_to_event.diff(moment(), 'hours', true).toFixed(1)) - (days_to_event * 24);
+var minutes_to_event = Math.floor(time_to_event.diff(moment(), 'minutes', true).toFixed(1)) - (days_to_event * 1440) - (hours_to_event * 60);
 
 var between_now_and_event = time_to_event.diff(moment());
 var duration = moment.duration(between_now_and_event).minutes();
@@ -55,9 +55,7 @@ var duration = moment.duration(between_now_and_event).minutes();
 
 const marquee_message =
   `<li id="xkcd"><marquee>
-
-  1.5˚ Climate Crisis ${years_to_event} years <span id="minutes" class='part'>${duration}</span>min
-
+  Next Mercury in Retrograde in ${days_to_event} days ${hours_to_event} hours ${minutes_to_event} minutes
   </marquee></li>`;
 
 /*******/
